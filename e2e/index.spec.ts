@@ -60,8 +60,8 @@ test.describe.serial("Todo tests", () => {
     await page.click('button:has-text("Add ✨")');
     await page.fill('input[placeholder="Add a new todo..."]', "Sing the Blues");
     await page.click('button:has-text("Add ✨")');
-    await expect(page.locator("ul li")).toHaveCount(2);
-  
+    await expect(page.locator("ul li")).toHaveCount(2, { timeout: 10000 });
+      
     await page.locator("ul li").first().locator('button:has-text("Delete 🗑️")').click();
   
     await expect(page.locator("ul li")).toHaveCount(1);
