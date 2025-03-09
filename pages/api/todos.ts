@@ -27,8 +27,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (req.method === "DELETE") {
-    const { id } = req.query;
-    todos = todos.filter((todo) => todo.id !== id);
+    const { id, reset } = req.query;
+    if (reset === "true") {
+      todos = [];
+      return res.status(200).json({ message: "Todos reset successfully" });
+    }
+    
+    if (id) {
+      todos = todos.filter((todo) => todo.id !== id);
+    }
     return res.status(200).json(todos);
   }
 }
