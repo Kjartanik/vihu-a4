@@ -29,8 +29,11 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Start Next.js server in the background
-        run: npm run dev &
+      - name: Build Next.js app
+        run: npm run build
+
+      - name: Start Next.js in production mode
+        run: npm run start &
         env:
           NEXT_PUBLIC_API_BASE_URL: http://localhost:3000
 
@@ -39,4 +42,3 @@ jobs:
 
       - name: Run Playwright tests
         run: npm run test:e2e
-
